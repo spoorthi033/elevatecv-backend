@@ -1,7 +1,7 @@
 # AI Powered Resume Analyzer
 
 ## Overview
-AI Powered Resume Analyzer is a Spring Boot based backend application that analyzes resumes uploaded in PDF format.
+AI Powered Resume Analyzer is a Spring Boot based backend application that analyzes resumes uploaded in PDF formats.
 
 The application extracts:
 - Email
@@ -90,6 +90,17 @@ http://localhost:8080/swagger-ui/index.html
 - Advanced ATS scoring
 
 ---
+## Screenshots
+
+### Swagger UI
+![Swagger UI](screenshot/swagger-ui.png)
+
+### Resume Upload API
+![Upload API](screenshot/upload-api.png)
+
+### Job Match API
+![Match API](screenshot/match-api.png)
+
 
 ## Author
 
