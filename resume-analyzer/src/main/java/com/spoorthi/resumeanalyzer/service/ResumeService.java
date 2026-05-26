@@ -7,6 +7,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import com.spoorthi.resumeanalyzer.model.Resume;
+import com.spoorthi.resumeanalyzer.repository.ResumeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,11 @@ import java.util.regex.Pattern;
 
 @Service
 public class ResumeService {
+    private final ResumeRepository resumeRepository;
+    public ResumeService(ResumeRepository resumeRepository) {
+        this.resumeRepository = resumeRepository;
+
+    }
 
     public ResumeResponse analyzeResume(MultipartFile file) {
 
@@ -43,6 +50,15 @@ public class ResumeService {
                 String suggestions = "Add more projects to improve resume";
 
                 String atsScore = "80%";
+                Resume resume = new Resume();
+
+                resume.setFileName(file.getOriginalFilename());
+                resume.setCandidateName(email);
+                resume.setAtsScore(80);
+                resume.setMatchedJob("Backend Developer");
+
+                resumeRepository.save(resume);
+
 
                 return new ResumeResponse(
                         email,
