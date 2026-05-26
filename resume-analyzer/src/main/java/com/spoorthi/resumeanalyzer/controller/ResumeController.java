@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
-@CrossOrigin(origins = "hhtp://localhost:9002")
+@CrossOrigin(origins = "hhtps://elevatecv.onrender.com")
 @RequestMapping("/resume")
 public class ResumeController {
 

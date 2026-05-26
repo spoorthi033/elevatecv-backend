@@ -1,12 +1,22 @@
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jdk AS build
+
+WORKDIR /workspace
+
+COPY resume-analyzer/.mvn .mvn
+COPY resume-analyzer/mvnw resume-analyzer/pom.xml ./
+
+RUN chmod +x mvnw && ./mvnw -B dependency:go-offline
+
+COPY resume-analyzer/src src
+
+RUN ./mvnw -B clean package -DskipTests
+
+FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY resume-analyzer/ .
-
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+COPY --from=build /workspace/target/*.jar app.jar
 
 EXPOSE 8080
 
-CMD java -jar $(find . -name "*.jar" | head -n 1)
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
